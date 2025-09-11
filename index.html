@@ -21,7 +21,6 @@
                 <a href="#about" class="nav-link">About</a>
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#achievements" class="nav-link">Achievements</a>
-                <a href="#projects" class="nav-link">Projects</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
             <div class="hamburger">
@@ -40,7 +39,7 @@
             <p class="home-description">DevOps engineer by profession, AI enthusiast at heart. I thrive on automating
                 workflows, optimizing cloud infrastructure, and exploring next-gen DevOps practices.</p>
             <div class="home-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#experience" class="btn btn-primary">View My Experience</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
             </div>
         </div>
@@ -164,73 +163,104 @@
     <section id="experience" class="experience">
         <div class="container">
             <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">Jan 2023 – Present</div>
-                    <div class="timeline-content">
+            <div class="experience-cards"></div>
+            <div class="experience-card current">
+                <div class="experience-header">
+                    <div class="experience-date">Jan 2023 – Present</div>
+                    <div class="experience-title">
                         <h3>DevOps Specialist</h3>
                         <h4>Sonata Software - TUI</h4>
-                        <ul>
-                            <li><strong>CI/CD Pipeline Management:</strong> Design, implement, and maintain CI/CD
-                                pipelines using GitLab and Jenkins for seamless application deployment</li>
-                            <li><strong>AWS Infrastructure & Security:</strong> Set up and manage AWS accounts with
-                                strong focus on security, networking, and compliance best practices</li>
-                            <li><strong>Infrastructure as Code:</strong> Develop and automate infrastructure
-                                provisioning using Terraform, CloudFormation, AWS SAM, and AWS CDK</li>
-                            <li><strong>AWS SSO Migration:</strong> Led migration of AWS console logins to SSO,
-                                configuring roles and policies for appropriate access control</li>
-                            <li><strong>Monitoring & Incident Management:</strong> Configure Datadog for performance
-                                monitoring and PagerDuty alerts for proactive issue resolution</li>
-                            <li><strong>Production Deployments:</strong> Oversee end-to-end deployment processes
-                                ensuring smooth and secure production releases</li>
-                        </ul>
                     </div>
+                    <div class="experience-status">Current Role</div>
                 </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Jan 2022 – Sept 2023</div>
-                    <div class="timeline-content">
-                        <h3>DevOps Engineer</h3>
-                        <h4>Sonata Software - Symmetra</h4>
-                        <ul>
-                            <li><strong>Azure DevOps Pipelines:</strong> Designed and managed CI/CD pipelines using
-                                Azure DevOps for seamless application deployment</li>
-                            <li><strong>AWS Infrastructure:</strong> Created and managed AWS services ensuring secure
-                                and scalable cloud infrastructure</li>
-                            <li><strong>Serverless Applications:</strong> Implemented end-to-end DevOps pipelines for
-                                frontend and backend using SAM templates</li>
-                            <li><strong>SSO Implementation:</strong> Configured AWS Cognito for Single Sign-On with
-                                Azure AD (ADFS) for secure authentication</li>
-                        </ul>
-                    </div>
+                <div class="experience-summary">
+                    <p>Leading CI/CD pipeline management, AWS infrastructure security, and Infrastructure as Code
+                        implementations for TUI's enterprise applications.</p>
                 </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Nov 2021 – Jan 2022</div>
-                    <div class="timeline-content">
-                        <h3>Support DevOps Engineer</h3>
-                        <h4>Sonata Software - SRG</h4>
-                        <ul>
-                            <li><strong>AWS DevOps Services:</strong> Managed and supported CodePipeline, CodeBuild, and
-                                CodeDeploy for streamlined CI/CD workflows</li>
-                            <li><strong>Infrastructure as Code:</strong> Worked on CloudFormation template creation to
-                                provision and manage AWS infrastructure efficiently</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Nov 2020 – Oct 2021</div>
-                    <div class="timeline-content">
-                        <h3>Python Developer</h3>
-                        <h4>Sonata Software - TrueNorth</h4>
-                        <ul>
-                            <li><strong>Data Mining & Web Scraping:</strong> Developed data extraction solutions using
-                                Python and Django for efficient data collection and processing</li>
-                        </ul>
-                    </div>
+                <div class="experience-details">
+                    <ul>
+                        <li><strong>CI/CD Pipeline Management:</strong> Design, implement, and maintain CI/CD pipelines
+                            using GitLab and Jenkins for seamless application deployment</li>
+                        <li><strong>AWS Infrastructure & Security:</strong> Set up and manage AWS accounts with strong
+                            focus on security, networking, and compliance best practices</li>
+                        <li><strong>Infrastructure as Code:</strong> Develop and automate infrastructure provisioning
+                            using Terraform, CloudFormation, AWS SAM, and AWS CDK</li>
+                        <li><strong>AWS SSO Migration:</strong> Led migration of AWS console logins to SSO, configuring
+                            roles and policies for appropriate access control</li>
+                        <li><strong>Monitoring & Incident Management:</strong> Configure Datadog for performance
+                            monitoring and PagerDuty alerts for proactive issue resolution</li>
+                        <li><strong>Production Deployments:</strong> Oversee end-to-end deployment processes ensuring
+                            smooth and secure production releases</li>
+                    </ul>
                 </div>
             </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-date">Jan 2022 – Sept 2023</div>
+                    <div class="experience-title">
+                        <h3>DevOps Engineer</h3>
+                        <h4>Sonata Software - Symmetra</h4>
+                    </div>
+                </div>
+                <div class="experience-summary">
+                    <p>Managed Azure DevOps pipelines and AWS infrastructure for serverless applications with SSO
+                        integration.</p>
+                </div>
+                <div class="experience-details">
+                    <ul>
+                        <li><strong>Azure DevOps Pipelines:</strong> Designed and managed CI/CD pipelines using Azure
+                            DevOps for seamless application deployment</li>
+                        <li><strong>AWS Infrastructure:</strong> Created and managed AWS services ensuring secure and
+                            scalable cloud infrastructure</li>
+                        <li><strong>Serverless Applications:</strong> Implemented end-to-end DevOps pipelines for
+                            frontend and backend using SAM templates</li>
+                        <li><strong>SSO Implementation:</strong> Configured AWS Cognito for Single Sign-On with Azure AD
+                            (ADFS) for secure authentication</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-date">Nov 2021 – Jan 2022</div>
+                    <div class="experience-title">
+                        <h3>Support DevOps Engineer</h3>
+                        <h4>Sonata Software - SRG</h4>
+                    </div>
+                </div>
+                <div class="experience-summary">
+                    <p>Supported AWS DevOps services and CloudFormation infrastructure management.</p>
+                </div>
+                <div class="experience-details">
+                    <ul>
+                        <li><strong>AWS DevOps Services:</strong> Managed and supported CodePipeline, CodeBuild, and
+                            CodeDeploy for streamlined CI/CD workflows</li>
+                        <li><strong>Infrastructure as Code:</strong> Worked on CloudFormation template creation to
+                            provision and manage AWS infrastructure efficiently</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-date">Nov 2020 – Oct 2021</div>
+                    <div class="experience-title">
+                        <h3>Python Developer</h3>
+                        <h4>Sonata Software - TrueNorth</h4>
+                    </div>
+                </div>
+                <div class="experience-summary">
+                    <p>Developed data extraction solutions using Python and Django for efficient data processing.</p>
+                </div>
+                <div class="experience-details">
+                    <ul>
+                        <li><strong>Data Mining & Web Scraping:</strong> Developed data extraction solutions using
+                            Python and Django for efficient data collection and processing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -367,94 +397,8 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">My Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="project1.jpg" alt="E-commerce Website">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://github.com/[username]/project1" target="_blank" class="project-link">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="#" target="_blank" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Multi-Cloud Infrastructure Platform</h3>
-                        <p>Automated cloud infrastructure deployment across AWS using Terraform and GitLab CI/CD.
-                            Features auto-scaling, monitoring with Datadog, and disaster recovery capabilities.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">AWS</span>
-                            <span class="tech-tag">Terraform</span>
-                            <span class="tech-tag">GitLab CI/CD</span>
-                            <span class="tech-tag">Datadog</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="project2.jpg" alt="Task Management App">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://github.com/[username]/project2" target="_blank" class="project-link">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="#" target="_blank" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Kubernetes Microservices Platform</h3>
-                        <p>Containerized microservices architecture deployed on Kubernetes with automated CI/CD
-                            pipelines, service mesh, and comprehensive monitoring stack.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Kubernetes</span>
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">Jenkins</span>
-                            <span class="tech-tag">Python</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="project3.jpg" alt="Weather Dashboard">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://github.com/[username]/project3" target="_blank" class="project-link">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="#" target="_blank" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Infrastructure as Code Pipeline</h3>
-                        <p>Automated infrastructure provisioning and configuration management using Ansible and
-                            CloudFormation, with integrated security scanning and compliance checks.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Ansible</span>
-                            <span class="tech-tag">CloudFormation</span>
-                            <span class="tech-tag">Bash</span>
-                            <span class="tech-tag">Linux</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">

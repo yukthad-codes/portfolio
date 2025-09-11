@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages (Branch Method)
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          exclude_assets: '.github,README.md,DEPLOYMENT_GUIDE.md,placeholder-images.md'
+
+      - name: Deployment Complete
+        run: |
+          echo "✅ Portfolio deployed successfully!"
+          echo "🌐 Your site should be available at:"
+          echo "   https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          echo ""
+          echo "📝 Next steps:"
+          echo "1. Go to Settings > Pages in your repository"
+          echo "2. Set Source to 'Deploy from a branch'"
+          echo "3. Select 'gh-pages' branch"
+          echo "4. Your site will be live in a few minutes!"

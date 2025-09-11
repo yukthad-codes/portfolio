@@ -46,23 +46,37 @@ git branch -M main
 git push -u origin main
 ```
 
-### 3. Enable GitHub Pages (Two Options)
+### 3. Enable GitHub Pages
 
-#### Option A: Automatic Deployment with GitHub Actions (Recommended)
+**IMPORTANT**: You must enable GitHub Pages BEFORE the workflows can deploy successfully.
 
-1. In your repository, click **Settings** tab
-2. Scroll to **Pages** section (left sidebar)
-3. Under **Source**: Select "GitHub Actions"
-4. The workflow will automatically deploy your site when you push changes
+#### Step-by-Step Setup:
 
-#### Option B: Manual Deployment
+1. **Go to Repository Settings**
+   - Click **Settings** tab in your repository
+   - Scroll to **Pages** section (left sidebar)
 
-1. In your repository, click **Settings** tab
-2. Scroll to **Pages** section (left sidebar)
-3. Under **Source**: Select "Deploy from a branch"
-4. **Branch**: Select "main"
-5. **Folder**: Select "/ (root)"
-6. Click **Save**
+2. **Choose Deployment Method**
+
+   **Option A: GitHub Actions (Recommended)**
+   - Under **Source**: Select "GitHub Actions"
+   - This enables automatic deployment via workflows
+   - Your site deploys automatically when you push changes
+
+   **Option B: Branch Deployment (Fallback)**
+   - Under **Source**: Select "Deploy from a branch"
+   - **Branch**: Select "main" 
+   - **Folder**: Select "/ (root)"
+   - Click **Save**
+
+3. **Verify Setup**
+   - You should see a green checkmark and URL after setup
+   - The URL will be: `https://YOUR_USERNAME.github.io/REPO_NAME/`
+
+#### If GitHub Actions Fails:
+- Use the fallback workflow: `.github/workflows/deploy-fallback.yml`
+- This creates a `gh-pages` branch for deployment
+- Then set Pages source to "Deploy from branch" → "gh-pages"
 
 ### 4. Access Your Live Site
 

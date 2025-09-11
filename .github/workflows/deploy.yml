@@ -15,23 +15,44 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v4
+        continue-on-error: true
+
+      - name: Create _site directory
+        run: |
+          mkdir -p _site
+          cp -r * _site/ 2>/dev/null || true
+          # Remove workflow files and docs from deployment
+          rm -rf _site/.github
+          rm -f _site/README.md _site/DEPLOYMENT_GUIDE.md _site/placeholder-images.md
+          ls -la _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Deployment Status
+        run: |
+          if [ "${{ steps.deployment.outcome }}" == "success" ]; then
+            echo "✅ Deployment successful!"
+            echo "🌐 Your site should be available at: ${{ steps.deployment.outputs.page_url }}"
+          else
+            echo "❌ Deployment failed. Please check:"
+            echo "1. Repository Settings > Pages > Source is set to 'GitHub Actions'"
+            echo "2. Repository is public or you have GitHub Pro/Team"
+            echo "3. Pages feature is enabled for your repository"
+          fi

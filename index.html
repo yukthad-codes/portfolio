@@ -33,17 +33,83 @@
 
     <!-- Home Section -->
     <section id="home" class="home">
+        <div class="home-background"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+        </div>
+
         <div class="home-content">
-            <h1 class="home-title">Hi, I'm <span class="highlight">Yuktha D</span></h1>
-            <p class="home-subtitle">AWS & CI/CD Specialist | Cloud & Automation Enthusiast</p>
-            <p class="home-description">DevOps engineer by profession, AI enthusiast at heart. I thrive on automating
-                workflows, optimizing cloud infrastructure, and exploring next-gen DevOps practices.</p>
+            <div class="home-intro">
+                <div class="greeting">Hello, I'm</div>
+                <h1 class="home-title">
+                    <span class="name-highlight">Yuktha D</span>
+                    <div class="title-underline"></div>
+                </h1>
+                <div class="role-container">
+                    <span class="role-prefix">I'm a</span>
+                    <div class="animated-roles">
+                        <span class="role active">DevOps Specialist</span>
+                        <span class="role">Cloud Architect</span>
+                        <span class="role">Infrastructure Engineer</span>
+                        <span class="role">Automation Expert</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="home-description">
+                Transforming complex infrastructure challenges into elegant, automated solutions.
+                I architect scalable cloud environments and build CI/CD pipelines that empower teams to deliver faster
+                and more reliably.
+            </p>
+
+            <div class="home-skills">
+                <div class="skills-label">Expertise in:</div>
+                <div class="skills-tags">
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Terraform</span>
+                    <span class="skill-tag">GitLab CI/CD</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Kubernetes</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Datadog</span>
+                    <span class="skill-tag">Jenkins</span>
+                </div>
+            </div>
+
             <div class="home-buttons">
-                <a href="#experience" class="btn btn-primary">View My Experience</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                <a href="#experience" class="btn btn-primary">
+                    <span>Explore My Journey</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <span>Let's Connect</span>
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+
+            <div class="home-stats">
+                <div class="stat">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">8+</div>
+                    <div class="stat-label">Awards Received</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Cloud Focused</div>
+                </div>
             </div>
         </div>
+
         <div class="scroll-indicator">
+            <div class="scroll-text">Scroll to explore</div>
             <div class="scroll-arrow"></div>
         </div>
     </section>
@@ -163,101 +229,145 @@
     <section id="experience" class="experience">
         <div class="container">
             <h2 class="section-title">Professional Experience</h2>
-            <div class="experience-cards"></div>
-            <div class="experience-card current">
+            <div class="experience-cards">
+                <div class="experience-card current"></div>
                 <div class="experience-header">
-                    <div class="experience-date">Jan 2023 – Present</div>
+                    <div class="experience-meta">
+                        <div class="experience-date">Jan 2023 – Present</div>
+                        <div class="experience-status">Current Role</div>
+                    </div>
                     <div class="experience-title">
                         <h3>DevOps Specialist</h3>
                         <h4>Sonata Software - TUI</h4>
                     </div>
-                    <div class="experience-status">Current Role</div>
                 </div>
-                <div class="experience-summary">
-                    <p>Leading CI/CD pipeline management, AWS infrastructure security, and Infrastructure as Code
-                        implementations for TUI's enterprise applications.</p>
-                </div>
-                <div class="experience-details">
-                    <ul>
-                        <li><strong>CI/CD Pipeline Management:</strong> Design, implement, and maintain CI/CD pipelines
-                            using GitLab and Jenkins for seamless application deployment</li>
-                        <li><strong>AWS Infrastructure & Security:</strong> Set up and manage AWS accounts with strong
-                            focus on security, networking, and compliance best practices</li>
-                        <li><strong>Infrastructure as Code:</strong> Develop and automate infrastructure provisioning
-                            using Terraform, CloudFormation, AWS SAM, and AWS CDK</li>
-                        <li><strong>AWS SSO Migration:</strong> Led migration of AWS console logins to SSO, configuring
-                            roles and policies for appropriate access control</li>
-                        <li><strong>Monitoring & Incident Management:</strong> Configure Datadog for performance
-                            monitoring and PagerDuty alerts for proactive issue resolution</li>
-                        <li><strong>Production Deployments:</strong> Oversee end-to-end deployment processes ensuring
-                            smooth and secure production releases</li>
-                    </ul>
+                <div class="experience-body">
+                    <div class="experience-summary">
+                        <p>Leading CI/CD pipeline management, AWS infrastructure security, and Infrastructure as Code
+                            implementations for TUI's enterprise applications.</p>
+                    </div>
+                    <div class="experience-details">
+                        <ul>
+                            <li><strong>CI/CD Pipeline Management</strong> Design, implement, and maintain CI/CD
+                                pipelines using GitLab and Jenkins for seamless application deployment</li>
+                            <li><strong>AWS Infrastructure & Security</strong> Set up and manage AWS accounts with
+                                strong focus on security, networking, and compliance best practices</li>
+                            <li><strong>Infrastructure as Code</strong> Develop and automate infrastructure provisioning
+                                using Terraform, CloudFormation, AWS SAM, and AWS CDK</li>
+                            <li><strong>AWS SSO Migration</strong> Led migration of AWS console logins to SSO,
+                                configuring roles and policies for appropriate access control</li>
+                            <li><strong>Monitoring & Incident Management</strong> Configure Datadog for performance
+                                monitoring and PagerDuty alerts for proactive issue resolution</li>
+                            <li><strong>Production Deployments</strong> Oversee end-to-end deployment processes ensuring
+                                smooth and secure production releases</li>
+                        </ul>
+                        <div class="experience-tech-stack">
+                            <span class="tech-badge">AWS</span>
+                            <span class="tech-badge">Terraform</span>
+                            <span class="tech-badge">GitLab CI/CD</span>
+                            <span class="tech-badge">Jenkins</span>
+                            <span class="tech-badge">Datadog</span>
+                            <span class="tech-badge">CloudFormation</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="experience-card">
                 <div class="experience-header">
-                    <div class="experience-date">Jan 2022 – Sept 2023</div>
+                    <div class="experience-meta">
+                        <div class="experience-date">Jan 2022 – Sept 2023</div>
+                    </div>
                     <div class="experience-title">
                         <h3>DevOps Engineer</h3>
                         <h4>Sonata Software - Symmetra</h4>
                     </div>
                 </div>
-                <div class="experience-summary">
-                    <p>Managed Azure DevOps pipelines and AWS infrastructure for serverless applications with SSO
-                        integration.</p>
-                </div>
-                <div class="experience-details">
-                    <ul>
-                        <li><strong>Azure DevOps Pipelines:</strong> Designed and managed CI/CD pipelines using Azure
-                            DevOps for seamless application deployment</li>
-                        <li><strong>AWS Infrastructure:</strong> Created and managed AWS services ensuring secure and
-                            scalable cloud infrastructure</li>
-                        <li><strong>Serverless Applications:</strong> Implemented end-to-end DevOps pipelines for
-                            frontend and backend using SAM templates</li>
-                        <li><strong>SSO Implementation:</strong> Configured AWS Cognito for Single Sign-On with Azure AD
-                            (ADFS) for secure authentication</li>
-                    </ul>
+                <div class="experience-body">
+                    <div class="experience-summary">
+                        <p>Managed Azure DevOps pipelines and AWS infrastructure for serverless applications with SSO
+                            integration.</p>
+                    </div>
+                    <div class="experience-details">
+                        <ul>
+                            <li><strong>Azure DevOps Pipelines</strong> Designed and managed CI/CD pipelines using Azure
+                                DevOps for seamless application deployment</li>
+                            <li><strong>AWS Infrastructure</strong> Created and managed AWS services ensuring secure and
+                                scalable cloud infrastructure</li>
+                            <li><strong>Serverless Applications</strong> Implemented end-to-end DevOps pipelines for
+                                frontend and backend using SAM templates</li>
+                            <li><strong>SSO Implementation</strong> Configured AWS Cognito for Single Sign-On with Azure
+                                AD (ADFS) for secure authentication</li>
+                        </ul>
+                        <div class="experience-tech-stack">
+                            <span class="tech-badge">Azure DevOps</span>
+                            <span class="tech-badge">AWS</span>
+                            <span class="tech-badge">SAM</span>
+                            <span class="tech-badge">Cognito</span>
+                            <span class="tech-badge">Azure AD</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="experience-card">
                 <div class="experience-header">
-                    <div class="experience-date">Nov 2021 – Jan 2022</div>
+                    <div class="experience-meta">
+                        <div class="experience-date">Nov 2021 – Jan 2022</div>
+                    </div>
                     <div class="experience-title">
                         <h3>Support DevOps Engineer</h3>
                         <h4>Sonata Software - SRG</h4>
                     </div>
                 </div>
-                <div class="experience-summary">
-                    <p>Supported AWS DevOps services and CloudFormation infrastructure management.</p>
-                </div>
-                <div class="experience-details">
-                    <ul>
-                        <li><strong>AWS DevOps Services:</strong> Managed and supported CodePipeline, CodeBuild, and
-                            CodeDeploy for streamlined CI/CD workflows</li>
-                        <li><strong>Infrastructure as Code:</strong> Worked on CloudFormation template creation to
-                            provision and manage AWS infrastructure efficiently</li>
-                    </ul>
+                <div class="experience-body">
+                    <div class="experience-summary">
+                        <p>Supported AWS DevOps services and CloudFormation infrastructure management.</p>
+                    </div>
+                    <div class="experience-details">
+                        <ul>
+                            <li><strong>AWS DevOps Services</strong> Managed and supported CodePipeline, CodeBuild, and
+                                CodeDeploy for streamlined CI/CD workflows</li>
+                            <li><strong>Infrastructure as Code</strong> Worked on CloudFormation template creation to
+                                provision and manage AWS infrastructure efficiently</li>
+                        </ul>
+                        <div class="experience-tech-stack">
+                            <span class="tech-badge">CodePipeline</span>
+                            <span class="tech-badge">CodeBuild</span>
+                            <span class="tech-badge">CodeDeploy</span>
+                            <span class="tech-badge">CloudFormation</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="experience-card">
                 <div class="experience-header">
-                    <div class="experience-date">Nov 2020 – Oct 2021</div>
+                    <div class="experience-meta">
+                        <div class="experience-date">Nov 2020 – Oct 2021</div>
+                    </div>
                     <div class="experience-title">
                         <h3>Python Developer</h3>
                         <h4>Sonata Software - TrueNorth</h4>
                     </div>
                 </div>
-                <div class="experience-summary">
-                    <p>Developed data extraction solutions using Python and Django for efficient data processing.</p>
-                </div>
-                <div class="experience-details">
-                    <ul>
-                        <li><strong>Data Mining & Web Scraping:</strong> Developed data extraction solutions using
-                            Python and Django for efficient data collection and processing</li>
-                    </ul>
+                <div class="experience-body">
+                    <div class="experience-summary">
+                        <p>Developed data extraction solutions using Python and Django for efficient data processing.
+                        </p>
+                    </div>
+                    <div class="experience-details">
+                        <ul>
+                            <li><strong>Data Mining & Web Scraping</strong> Developed data extraction solutions using
+                                Python and Django for efficient data collection and processing</li>
+                        </ul>
+                        <div class="experience-tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Django</span>
+                            <span class="tech-badge">Web Scraping</span>
+                            <span class="tech-badge">Data Mining</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

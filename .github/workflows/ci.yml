@@ -18,12 +18,10 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'npm'
         
     - name: Install dependencies
       run: |
-        npm init -y
-        npm install --save-dev htmlhint stylelint stylelint-config-standard eslint
+        npm install --no-package-lock --save-dev htmlhint stylelint stylelint-config-standard eslint
         
     - name: Create config files
       run: |

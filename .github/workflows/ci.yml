@@ -1,0 +1,193 @@
+name: CI - Code Quality Checks
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint-and-validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        npm init -y
+        npm install --save-dev htmlhint stylelint stylelint-config-standard eslint
+        
+    - name: Create config files
+      run: |
+        # HTMLHint config
+        cat > .htmlhintrc << EOF
+        {
+          "tagname-lowercase": true,
+          "attr-lowercase": true,
+          "attr-value-double-quotes": true,
+          "doctype-first": true,
+          "tag-pair": true,
+          "spec-char-escape": true,
+          "id-unique": true,
+          "src-not-empty": true,
+          "attr-no-duplication": true,
+          "alt-require": true
+        }
+        EOF
+        
+        # StyleLint config
+        cat > .stylelintrc.json << EOF
+        {
+          "extends": ["stylelint-config-standard"],
+          "rules": {
+            "indentation": 4,
+            "string-quotes": "single"
+          }
+        }
+        EOF
+        
+        # ESLint config
+        cat > .eslintrc.json << EOF
+        {
+          "env": {
+            "browser": true,
+            "es2021": true
+          },
+          "extends": "eslint:recommended",
+          "parserOptions": {
+            "ecmaVersion": 12,
+            "sourceType": "module"
+          },
+          "rules": {
+            "no-unused-vars": "warn",
+            "no-console": "warn"
+          }
+        }
+        EOF
+        
+    - name: Lint HTML
+      run: npx htmlhint "*.html"
+      continue-on-error: true
+      
+    - name: Lint CSS
+      run: npx stylelint "*.css"
+      continue-on-error: true
+      
+    - name: Lint JavaScript
+      run: npx eslint "*.js"
+      continue-on-error: true
+      
+    - name: Check file sizes
+      run: |
+        echo "Checking file sizes..."
+        find . -name "*.jpg" -o -name "*.png" -o -name "*.gif" | while read file; do
+          size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null || echo "0")
+          if [ "$size" -gt 1048576 ]; then
+            echo "WARNING: $file is larger than 1MB ($size bytes)"
+          else
+            echo "✓ $file size OK ($size bytes)"
+          fi
+        done
+        
+    - name: Validate HTML structure
+      run: |
+        echo "Validating HTML structure..."
+        if grep -q "<!DOCTYPE html>" index.html; then
+          echo "✓ DOCTYPE declaration found"
+        else
+          echo "❌ Missing DOCTYPE declaration"
+          exit 1
+        fi
+        
+        if grep -q '<meta name="viewport"' index.html; then
+          echo "✓ Viewport meta tag found"
+        else
+          echo "❌ Missing viewport meta tag"
+          exit 1
+        fi
+        
+        if grep -q '<title>' index.html; then
+          echo "✓ Title tag found"
+        else
+          echo "❌ Missing title tag"
+          exit 1
+        fi
+
+  accessibility-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install Pa11y
+      run: npm install -g pa11y
+      
+    - name: Start local server
+      run: |
+        python3 -m http.server 8000 &
+        sleep 5
+        
+    - name: Run accessibility tests
+      run: |
+        pa11y http://localhost:8000 --reporter cli || echo "Accessibility issues found - please review"
+      continue-on-error: true
+
+  performance-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Check CSS performance
+      run: |
+        echo "Checking CSS file sizes..."
+        css_size=$(wc -c < style.css)
+        if [ "$css_size" -gt 102400 ]; then
+          echo "WARNING: CSS file is large ($css_size bytes). Consider optimization."
+        else
+          echo "✓ CSS file size OK ($css_size bytes)"
+        fi
+        
+    - name: Check JavaScript performance
+      run: |
+        echo "Checking JavaScript file sizes..."
+        js_size=$(wc -c < script.js)
+        if [ "$js_size" -gt 51200 ]; then
+          echo "WARNING: JavaScript file is large ($js_size bytes). Consider optimization."
+        else
+          echo "✓ JavaScript file size OK ($js_size bytes)"
+        fi
+        
+    - name: Check for optimization opportunities
+      run: |
+        echo "Checking for optimization opportunities..."
+        
+        # Check for unused CSS (basic check)
+        if grep -q "@media" style.css; then
+          echo "✓ Responsive design detected"
+        fi
+        
+        # Check for image optimization hints
+        if ls *.jpg *.png *.gif 2>/dev/null; then
+          echo "📸 Remember to optimize images before deployment"
+        fi
+        
+        # Check for minification opportunities
+        if grep -q "  " style.css || grep -q "  " script.js; then
+          echo "💡 Consider minifying CSS and JS for production"
+        fi

@@ -1,3 +1,67 @@
+// EmailJS Configuration
+const emailConfig = {
+    serviceId: 'YOUR_SERVICE_ID',
+    templateId: 'YOUR_TEMPLATE_ID',
+    publicKey: 'YOUR_PUBLIC_KEY'
+};
+
+// Email Template Configuration
+// Template variable names that will be used in EmailJS dashboard setup
+// 
+// EmailJS Dashboard Setup Instructions:
+// When creating your email template in EmailJS dashboard, use these variable names:
+// - {{from_name}} - Will be replaced with the user's name
+// - {{from_email}} - Will be replaced with the user's email address
+// - {{subject}} - Will be replaced with the form subject
+// - {{message}} - Will be replaced with the user's message
+// - {{reply_to}} - Will be replaced with the user's email for easy replies
+//
+// Example template content:
+// Subject: Portfolio Contact: {{subject}}
+// Body: 
+// Name: {{from_name}}
+// Email: {{from_email}}
+// Subject: {{subject}}
+// 
+// Message:
+// {{message}}
+const emailTemplateVars = {
+    FROM_NAME: 'from_name',        // User's name from the form
+    FROM_EMAIL: 'from_email',      // User's email address  
+    SUBJECT: 'subject',            // Subject line from the form
+    MESSAGE: 'message',            // Message content from the form
+    REPLY_TO: 'reply_to'           // Reply-to email (same as from_email)
+};
+
+// Template parameters structure that matches the contact form fields
+const templateParamsStructure = {
+    from_name: '',      // string - User's full name (required)
+    from_email: '',     // string - User's email address (required, valid email format)
+    subject: '',        // string - Email subject line (required)
+    message: '',        // string - Email message content (required)
+    reply_to: ''        // string - Reply-to email address (same as from_email)
+};
+
+/**
+ * Template parameter mapping function to convert form data to EmailJS format
+ * @param {Object} formData - Form data object with name, email, subject, message
+ * @returns {Object} EmailJS template parameters object
+ */
+function mapFormDataToEmailTemplate(formData) {
+    return {
+        [emailTemplateVars.FROM_NAME]: formData.name || '',
+        [emailTemplateVars.FROM_EMAIL]: formData.email || '',
+        [emailTemplateVars.SUBJECT]: formData.subject || '',
+        [emailTemplateVars.MESSAGE]: formData.message || '',
+        [emailTemplateVars.REPLY_TO]: formData.email || ''
+    };
+}
+
+// Initialize EmailJS
+(function() {
+    emailjs.init(emailConfig.publicKey);
+})();
+
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -69,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Contact form handling
 const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', function(e) {
+contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     
     // Get form data
@@ -79,7 +143,7 @@ contactForm.addEventListener('submit', function(e) {
     const subject = formData.get('subject');
     const message = formData.get('message');
     
-    // Simple validation
+    // Maintain existing form validation before attempting to send email
     if (!name || !email || !subject || !message) {
         showNotification('Please fill in all fields.', 'error');
         return;
@@ -90,10 +154,110 @@ contactForm.addEventListener('submit', function(e) {
         return;
     }
     
-    // Simulate form submission (replace with actual form handling)
-    showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
-    this.reset();
+    // Enhanced form submission with EmailJS integration
+    await handleFormSubmission({
+        name: name,
+        email: email,
+        subject: subject,
+        message: message
+    }, this);
 });
+
+/**
+ * Enhanced form submission handler with EmailJS integration
+ * @param {Object} formData - Form data object with name, email, subject, message
+ * @param {HTMLFormElement} formElement - The form element for resetting on success
+ */
+async function handleFormSubmission(formData, formElement) {
+    const submitButton = formElement.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.textContent;
+    
+    try {
+        // Implement loading state for the submit button during email sending
+        setButtonLoadingState(submitButton, true);
+        
+        // Map form data to EmailJS template parameters
+        const templateParams = mapFormDataToEmailTemplate(formData);
+        
+        // Send email via EmailJS with async/await pattern
+        const response = await emailjs.send(
+            emailConfig.serviceId,
+            emailConfig.templateId,
+            templateParams
+        );
+        
+        // Handle successful email sending
+        if (response.status === 200) {
+            showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
+            formElement.reset();
+        } else {
+            throw new Error('Email service returned unexpected status: ' + response.status);
+        }
+        
+    } catch (error) {
+        // Implement proper error handling for EmailJS service calls
+        handleEmailError(error);
+    } finally {
+        // Reset button to original state
+        setButtonLoadingState(submitButton, false, originalButtonText);
+    }
+}
+
+/**
+ * Set loading state for submit button with visual loading indicator
+ * @param {HTMLButtonElement} button - The submit button element
+ * @param {boolean} isLoading - Whether to show loading state
+ * @param {string} originalText - Original button text to restore when not loading
+ */
+function setButtonLoadingState(button, isLoading, originalText = 'Send Message') {
+    if (isLoading) {
+        // Disable form submission during email sending to prevent duplicate requests
+        button.disabled = true;
+        
+        // Add visual loading indicator (spinner or text change) on the submit button
+        button.innerHTML = `
+            <span class="loading-spinner"></span>
+            Sending...
+        `;
+        
+        // Add loading class for additional styling
+        button.classList.add('loading');
+    } else {
+        // Re-enable button and restore original state
+        button.disabled = false;
+        button.textContent = originalText;
+        button.classList.remove('loading');
+    }
+}
+
+/**
+ * Handle EmailJS service errors with specific error messages
+ * @param {Error} error - The error object from EmailJS service call
+ */
+function handleEmailError(error) {
+    console.error('EmailJS Error:', error);
+    
+    let errorMessage = 'Failed to send message. Please try again or contact directly via email.';
+    
+    // Handle specific EmailJS error scenarios
+    if (error.text) {
+        // EmailJS specific errors
+        if (error.text.includes('Invalid template ID') || error.text.includes('Invalid service ID')) {
+            errorMessage = 'Email service is temporarily unavailable. Please try again later.';
+        } else if (error.text.includes('rate limit') || error.text.includes('quota')) {
+            errorMessage = 'Too many requests. Please wait a moment before sending another message.';
+        } else if (error.text.includes('network') || error.text.includes('connection')) {
+            errorMessage = 'Unable to send message. Please check your connection and try again.';
+        }
+    } else if (error.message) {
+        // Network or other JavaScript errors
+        if (error.message.includes('fetch') || error.message.includes('network')) {
+            errorMessage = 'Unable to send message. Please check your connection and try again.';
+        }
+    }
+    
+    showNotification(errorMessage, 'error');
+}
 
 // Email validation function
 function isValidEmail(email) {

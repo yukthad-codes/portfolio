@@ -56,5 +56,5 @@ coverage/
 
 # Optional eslint cache
 .eslintcache
-
+*.md
 # *.jpg

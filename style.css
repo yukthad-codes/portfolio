@@ -794,33 +794,69 @@ body {
     min-height: 120px;
 }
 
-/* Loading State Styles */
+/* ============================================================================
+   EMAILJS INTEGRATION STYLES
+   ============================================================================
+   
+   These styles support the EmailJS contact form integration by providing
+   visual feedback during form submission and email sending operations.
+   
+   LOADING STATE FUNCTIONALITY:
+   - Visual spinner indicates email is being sent via EmailJS
+   - Button disabled state prevents duplicate form submissions  
+   - Opacity change provides clear visual feedback of processing state
+   - Hover effects disabled during loading to reinforce disabled state
+   
+   TESTING THE LOADING STATES:
+   1. Submit contact form and verify loading spinner appears immediately
+   2. Check that button becomes unclickable during EmailJS submission
+   3. Confirm button text changes to "Sending..." with spinner animation
+   4. Verify button returns to normal state after EmailJS completion
+   5. Test that hover effects are disabled during loading state
+   6. Ensure loading state works across different browsers and devices
+   
+   INTEGRATION POINTS:
+   - .loading-spinner class is dynamically added by JavaScript during submission
+   - .btn.loading class is applied to submit button during EmailJS operations
+   - Styles coordinate with handleFormSubmission() and setButtonLoadingState() functions
+   
+   CUSTOMIZATION OPTIONS:
+   - Change spinner colors by modifying border properties
+   - Adjust spinner size by changing width/height values
+   - Modify loading opacity for different visual emphasis
+   - Customize animation speed by changing animation duration
+*/
+
+/* Loading Spinner Animation for EmailJS Form Submission */
 .loading-spinner {
     display: inline-block;
-    width: 16px;
+    width: 16px;                                    /* Compact size for button integration */
     height: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-top: 2px solid white;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-right: 8px;
-    vertical-align: middle;
+    border: 2px solid rgba(255, 255, 255, 0.3);   /* Semi-transparent border for depth */
+    border-top: 2px solid white;                   /* Solid white for spinning effect */
+    border-radius: 50%;                            /* Perfect circle shape */
+    animation: spin 1s linear infinite;            /* Smooth continuous rotation */
+    margin-right: 8px;                             /* Space between spinner and "Sending..." text */
+    vertical-align: middle;                        /* Align with button text baseline */
 }
 
+/* Submit Button Loading State During EmailJS Operations */
 .btn.loading {
-    opacity: 0.8;
-    cursor: not-allowed;
-    transform: none !important;
+    opacity: 0.8;                                  /* Visual indication of disabled state */
+    cursor: not-allowed;                           /* Shows disabled cursor on hover */
+    transform: none !important;                    /* Disable normal button animations */
 }
 
+/* Disable All Hover Effects During EmailJS Processing */
 .btn.loading:hover {
-    transform: none !important;
-    box-shadow: none !important;
+    transform: none !important;                    /* Prevent hover scale/transform effects */
+    box-shadow: none !important;                   /* Disable hover shadow effects */
 }
 
+/* Keyframe Animation for Loading Spinner */
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% { transform: rotate(0deg); }                /* Start position */
+    100% { transform: rotate(360deg); }            /* Full rotation */
 }
 
 /* Footer */

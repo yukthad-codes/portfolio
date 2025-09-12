@@ -114,12 +114,10 @@ body {
     position: relative;
     padding: 120px 10px 80px 10px;
 }
-.profile-img {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 5px solid #3498db;
+.nav-logo-img {
+    height: 50px;   /* adjust size as needed */
+    width: auto;    /* keeps aspect ratio */
+    display: block;
 }
 
 

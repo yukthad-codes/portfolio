@@ -485,8 +485,80 @@
         </div>
     </footer>
 
-    <!-- EmailJS Library -->
+    <!-- 
+    ============================================================================
+    EMAILJS INTEGRATION SCRIPTS
+    ============================================================================
+    
+    EmailJS Library Integration:
+    - Loads EmailJS browser library from CDN for reliable email service access
+    - Version 4 provides the latest features and security updates
+    - Must be loaded before script.js to ensure emailjs object is available
+    
+    Integration Testing Checklist:
+    □ EmailJS script loads successfully (check browser network tab)
+    □ No console errors related to EmailJS library loading
+    □ emailjs object is available in browser console after page load
+    □ EmailJS initialization completes without errors
+    
+    Contact Form Testing Scenarios:
+    
+    POSITIVE TESTS (Expected to succeed):
+    □ Submit form with all valid fields filled
+    □ Verify email is received at configured destination
+    □ Check that reply-to address is set to sender's email
+    □ Confirm form resets after successful submission
+    □ Validate success notification appears and disappears
+    
+    VALIDATION TESTS (Expected to show validation errors):
+    □ Submit form with empty name field
+    □ Submit form with empty email field  
+    □ Submit form with empty subject field
+    □ Submit form with empty message field
+    □ Submit form with invalid email format (test@, @domain.com, invalid-email)
+    □ Submit form with name longer than 100 characters
+    □ Submit form with subject longer than 200 characters
+    □ Submit form with message longer than 2000 characters
+    
+    ERROR HANDLING TESTS (Expected to show error messages):
+    □ Test with invalid EmailJS configuration (wrong service/template ID)
+    □ Test with network disconnected (simulate network failure)
+    □ Test rapid form submissions (rate limiting)
+    □ Test with EmailJS service temporarily unavailable
+    
+    UI/UX TESTS:
+    □ Loading state appears immediately on form submission
+    □ Submit button is disabled during email sending
+    □ Loading spinner is visible and animating
+    □ Button text changes to "Sending..." during operation
+    □ Form data is preserved on error, cleared on success
+    □ Notifications appear in correct position and style
+    □ Notifications auto-dismiss after appropriate time
+    □ Form works correctly on mobile devices
+    □ Form is accessible via keyboard navigation
+    
+    CONFIGURATION TESTS:
+    □ Check browser console for EmailJS configuration validation messages
+    □ Verify ✅ success indicators or ⚠️ warning indicators on page load
+    □ Test with placeholder configuration values (should show warnings)
+    □ Test with missing configuration values (should show errors)
+    
+    CROSS-BROWSER TESTING:
+    □ Test in Chrome, Firefox, Safari, Edge
+    □ Test on mobile browsers (iOS Safari, Android Chrome)
+    □ Verify EmailJS compatibility across all target browsers
+    
+    SECURITY TESTS:
+    □ Verify no sensitive credentials are exposed in client code
+    □ Confirm EmailJS public key is safe to expose
+    □ Test that malicious input is handled safely
+    □ Verify CORS policies are properly configured
+    -->
+    
+    <!-- EmailJS Library - Must load before custom scripts -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- Custom JavaScript with EmailJS Integration -->
     <script src="script.js"></script>
 </body>
 

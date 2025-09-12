@@ -1,8 +1,8 @@
 // EmailJS Configuration
 const emailConfig = {
-    serviceId: 'YOUR_SERVICE_ID',
-    templateId: 'YOUR_TEMPLATE_ID',
-    publicKey: 'YOUR_PUBLIC_KEY'
+    serviceId: 'service_37hr0pt',
+    templateId: 'template_r4l0dtc',
+    publicKey: 'DyCeQgXEp0pjcr8nt'
 };
 
 // Email Template Configuration
@@ -143,14 +143,38 @@ contactForm.addEventListener('submit', async function(e) {
     const subject = formData.get('subject');
     const message = formData.get('message');
     
-    // Maintain existing form validation before attempting to send email
+    // Enhanced form validation with specific field validation messages
     if (!name || !email || !subject || !message) {
-        showNotification('Please fill in all fields.', 'error');
+        // Identify which specific fields are missing
+        const missingFields = [];
+        if (!name) missingFields.push('Name');
+        if (!email) missingFields.push('Email');
+        if (!subject) missingFields.push('Subject');
+        if (!message) missingFields.push('Message');
+        
+        const fieldText = missingFields.length === 1 ? 'field' : 'fields';
+        showNotification(`Please fill in the following ${fieldText}: ${missingFields.join(', ')}.`, 'error');
         return;
     }
     
     if (!isValidEmail(email)) {
         showNotification('Please enter a valid email address.', 'error');
+        return;
+    }
+    
+    // Additional validation for field lengths
+    if (name.length > 100) {
+        showNotification('Name must be less than 100 characters.', 'error');
+        return;
+    }
+    
+    if (subject.length > 200) {
+        showNotification('Subject must be less than 200 characters.', 'error');
+        return;
+    }
+    
+    if (message.length > 2000) {
+        showNotification('Message must be less than 2000 characters.', 'error');
         return;
     }
     
@@ -186,16 +210,29 @@ async function handleFormSubmission(formData, formElement) {
             templateParams
         );
         
-        // Handle successful email sending
+        // Handle successful email sending with proper success handling and form reset
         if (response.status === 200) {
+            // Show success notification
             showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
+            
+            // Reset form fields on successful submission (requirement 4.3)
             formElement.reset();
+            
+            // Optional: Clear any validation error states
+            const formGroups = formElement.querySelectorAll('.form-group');
+            formGroups.forEach(group => {
+                const input = group.querySelector('input, textarea');
+                if (input) {
+                    input.classList.remove('error');
+                }
+            });
         } else {
             throw new Error('Email service returned unexpected status: ' + response.status);
         }
         
     } catch (error) {
         // Implement proper error handling for EmailJS service calls
+        // Form data is preserved on error (not reset) so user doesn't lose their input
         handleEmailError(error);
     } finally {
         // Reset button to original state
@@ -231,7 +268,7 @@ function setButtonLoadingState(button, isLoading, originalText = 'Send Message')
 }
 
 /**
- * Handle EmailJS service errors with specific error messages
+ * Enhanced EmailJS error handler with specific error messages for different failure scenarios
  * @param {Error} error - The error object from EmailJS service call
  */
 function handleEmailError(error) {
@@ -239,33 +276,99 @@ function handleEmailError(error) {
     
     let errorMessage = 'Failed to send message. Please try again or contact directly via email.';
     
-    // Handle specific EmailJS error scenarios
+    // Handle specific EmailJS error scenarios with detailed error messages
     if (error.text) {
-        // EmailJS specific errors
-        if (error.text.includes('Invalid template ID') || error.text.includes('Invalid service ID')) {
+        const errorText = error.text.toLowerCase();
+        
+        // Configuration-related errors
+        if (errorText.includes('invalid template id') || errorText.includes('template not found')) {
+            errorMessage = 'Email service configuration error. Please try again later or contact directly via email.';
+        } else if (errorText.includes('invalid service id') || errorText.includes('service not found')) {
             errorMessage = 'Email service is temporarily unavailable. Please try again later.';
-        } else if (error.text.includes('rate limit') || error.text.includes('quota')) {
-            errorMessage = 'Too many requests. Please wait a moment before sending another message.';
-        } else if (error.text.includes('network') || error.text.includes('connection')) {
-            errorMessage = 'Unable to send message. Please check your connection and try again.';
+        } else if (errorText.includes('invalid public key') || errorText.includes('unauthorized')) {
+            errorMessage = 'Email service authentication failed. Please try again later.';
         }
-    } else if (error.message) {
-        // Network or other JavaScript errors
-        if (error.message.includes('fetch') || error.message.includes('network')) {
+        // Rate limiting and quota errors
+        else if (errorText.includes('rate limit') || errorText.includes('too many requests')) {
+            errorMessage = 'Too many requests. Please wait a moment before sending another message.';
+        } else if (errorText.includes('quota') || errorText.includes('limit exceeded')) {
+            errorMessage = 'Email service quota exceeded. Please try again later or contact directly via email.';
+        }
+        // Network and connection errors
+        else if (errorText.includes('network') || errorText.includes('connection') || errorText.includes('timeout')) {
             errorMessage = 'Unable to send message. Please check your connection and try again.';
+        } else if (errorText.includes('cors') || errorText.includes('blocked')) {
+            errorMessage = 'Email service is temporarily blocked. Please try again later.';
+        }
+        // Template and parameter errors
+        else if (errorText.includes('template') && errorText.includes('parameter')) {
+            errorMessage = 'Email template error. Please try again or contact directly via email.';
+        } else if (errorText.includes('invalid email') || errorText.includes('email format')) {
+            errorMessage = 'Invalid email format detected. Please check your email address and try again.';
+        }
+    } 
+    // Handle JavaScript/Network errors
+    else if (error.message) {
+        const errorMessage_lower = error.message.toLowerCase();
+        
+        if (errorMessage_lower.includes('fetch') || errorMessage_lower.includes('network')) {
+            errorMessage = 'Unable to send message. Please check your connection and try again.';
+        } else if (errorMessage_lower.includes('timeout')) {
+            errorMessage = 'Request timed out. Please check your connection and try again.';
+        } else if (errorMessage_lower.includes('cors')) {
+            errorMessage = 'Email service access blocked. Please try again later.';
+        }
+    }
+    // Handle status code errors
+    else if (error.status) {
+        switch (error.status) {
+            case 400:
+                errorMessage = 'Invalid request. Please check your information and try again.';
+                break;
+            case 401:
+                errorMessage = 'Email service authentication failed. Please try again later.';
+                break;
+            case 403:
+                errorMessage = 'Email service access denied. Please try again later.';
+                break;
+            case 404:
+                errorMessage = 'Email service not found. Please try again later.';
+                break;
+            case 429:
+                errorMessage = 'Too many requests. Please wait a moment before sending another message.';
+                break;
+            case 500:
+            case 502:
+            case 503:
+                errorMessage = 'Email service is temporarily unavailable. Please try again later.';
+                break;
+            default:
+                errorMessage = 'Failed to send message. Please try again or contact directly via email.';
         }
     }
     
+    // Display the appropriate error message
     showNotification(errorMessage, 'error');
 }
 
-// Email validation function
+// Enhanced email validation function with more comprehensive checks
 function isValidEmail(email) {
+    // Basic format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    
+    // Additional validation checks
+    if (!email || email.length === 0) return false;
+    if (email.length > 254) return false; // RFC 5321 limit
+    if (!emailRegex.test(email)) return false;
+    
+    // Check for common invalid patterns
+    if (email.startsWith('.') || email.endsWith('.')) return false;
+    if (email.includes('..')) return false; // Consecutive dots
+    
+    return true;
 }
 
-// Notification system
+// Enhanced notification system with EmailJS-specific error handling
 function showNotification(message, type) {
     // Remove existing notifications
     const existingNotification = document.querySelector('.notification');
@@ -278,19 +381,24 @@ function showNotification(message, type) {
     notification.className = `notification ${type}`;
     notification.textContent = message;
     
-    // Add styles
+    // Enhanced styles with better visual feedback
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
         padding: 15px 20px;
-        border-radius: 5px;
+        border-radius: 8px;
         color: white;
         font-weight: 500;
         z-index: 10000;
         transform: translateX(400px);
         transition: transform 0.3s ease;
-        ${type === 'success' ? 'background-color: #27ae60;' : 'background-color: #e74c3c;'}
+        max-width: 350px;
+        word-wrap: break-word;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        ${type === 'success' ? 
+            'background-color: #27ae60; border-left: 4px solid #1e8449;' : 
+            'background-color: #e74c3c; border-left: 4px solid #c0392b;'}
     `;
     
     // Add to page
@@ -301,13 +409,14 @@ function showNotification(message, type) {
         notification.style.transform = 'translateX(0)';
     }, 100);
     
-    // Remove after 5 seconds
+    // Remove after 5 seconds for success, 7 seconds for errors (more time to read)
+    const displayTime = type === 'success' ? 5000 : 7000;
     setTimeout(() => {
         notification.style.transform = 'translateX(400px)';
         setTimeout(() => {
             notification.remove();
         }, 300);
-    }, 5000);
+    }, displayTime);
 }
 
 // Typing animation for home section

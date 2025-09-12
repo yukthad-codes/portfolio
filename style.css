@@ -114,9 +114,12 @@ body {
     position: relative;
     padding: 120px 10px 80px 10px;
 }
+
 .nav-logo-img {
-    height: 50px;   /* adjust size as needed */
-    width: auto;    /* keeps aspect ratio */
+    height: 50px;
+    /* adjust size as needed */
+    width: auto;
+    /* keeps aspect ratio */
     display: block;
 }
 
@@ -394,24 +397,88 @@ body {
 }
 
 /* Specific icon colors for different technologies */
-.skill-item:nth-child(1) i { color: #FF9900; } /* AWS */
-.skill-item:nth-child(2) i { color: #2496ED; } /* Docker */
-.skill-item:nth-child(3) i { color: #326CE5; } /* Kubernetes */
-.skill-item:nth-child(4) i { color: #623CE4; } /* Terraform */
-.skill-item:nth-child(5) i { color: #EE0000; } /* Ansible */
-.skill-item:nth-child(6) i { color: #FF9900; } /* CloudFormation */
+.skill-item:nth-child(1) i {
+    color: #FF9900;
+}
 
-.skills-category:nth-child(3) .skill-item:nth-child(1) i { color: #FC6D26; } /* GitLab */
-.skills-category:nth-child(3) .skill-item:nth-child(2) i { color: #D33833; } /* Jenkins */
-.skills-category:nth-child(3) .skill-item:nth-child(3) i { color: #F05032; } /* Git */
-.skills-category:nth-child(3) .skill-item:nth-child(4) i { color: #632CA6; } /* Datadog */
+/* AWS */
+.skill-item:nth-child(2) i {
+    color: #2496ED;
+}
 
-.skills-category:nth-child(4) .skill-item:nth-child(1) i { color: #3776AB; } /* Python */
-.skills-category:nth-child(4) .skill-item:nth-child(2) i { color: #4EAA25; } /* Bash */
-.skills-category:nth-child(4) .skill-item:nth-child(3) i { color: #FCC624; } /* Linux */
-.skills-category:nth-child(4) .skill-item:nth-child(4) i { color: #F7DF1E; } /* JavaScript */
-.skills-category:nth-child(4) .skill-item:nth-child(5) i { color: #E34F26; } /* HTML5 */
-.skills-category:nth-child(4) .skill-item:nth-child(6) i { color: #1572B6; } /* CSS3 */
+/* Docker */
+.skill-item:nth-child(3) i {
+    color: #326CE5;
+}
+
+/* Kubernetes */
+.skill-item:nth-child(4) i {
+    color: #623CE4;
+}
+
+/* Terraform */
+.skill-item:nth-child(5) i {
+    color: #EE0000;
+}
+
+/* Ansible */
+.skill-item:nth-child(6) i {
+    color: #FF9900;
+}
+
+/* CloudFormation */
+
+.skills-category:nth-child(3) .skill-item:nth-child(1) i {
+    color: #FC6D26;
+}
+
+/* GitLab */
+.skills-category:nth-child(3) .skill-item:nth-child(2) i {
+    color: #D33833;
+}
+
+/* Jenkins */
+.skills-category:nth-child(3) .skill-item:nth-child(3) i {
+    color: #F05032;
+}
+
+/* Git */
+.skills-category:nth-child(3) .skill-item:nth-child(4) i {
+    color: #632CA6;
+}
+
+/* Datadog */
+
+.skills-category:nth-child(4) .skill-item:nth-child(1) i {
+    color: #3776AB;
+}
+
+/* Python */
+.skills-category:nth-child(4) .skill-item:nth-child(2) i {
+    color: #4EAA25;
+}
+
+/* Bash */
+.skills-category:nth-child(4) .skill-item:nth-child(3) i {
+    color: #FCC624;
+}
+
+/* Linux */
+.skills-category:nth-child(4) .skill-item:nth-child(4) i {
+    color: #F7DF1E;
+}
+
+/* JavaScript */
+.skills-category:nth-child(4) .skill-item:nth-child(5) i {
+    color: #E34F26;
+}
+
+/* HTML5 */
+.skills-category:nth-child(4) .skill-item:nth-child(6) i {
+    color: #1572B6;
+}
+
+/* CSS3 */
 
 /* Experience Section */
 .experience {
@@ -830,33 +897,53 @@ body {
 /* Loading Spinner Animation for EmailJS Form Submission */
 .loading-spinner {
     display: inline-block;
-    width: 16px;                                    /* Compact size for button integration */
+    width: 16px;
+    /* Compact size for button integration */
     height: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.3);   /* Semi-transparent border for depth */
-    border-top: 2px solid white;                   /* Solid white for spinning effect */
-    border-radius: 50%;                            /* Perfect circle shape */
-    animation: spin 1s linear infinite;            /* Smooth continuous rotation */
-    margin-right: 8px;                             /* Space between spinner and "Sending..." text */
-    vertical-align: middle;                        /* Align with button text baseline */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    /* Semi-transparent border for depth */
+    border-top: 2px solid white;
+    /* Solid white for spinning effect */
+    border-radius: 50%;
+    /* Perfect circle shape */
+    animation: spin 1s linear infinite;
+    /* Smooth continuous rotation */
+    margin-right: 8px;
+    /* Space between spinner and "Sending..." text */
+    vertical-align: middle;
+    /* Align with button text baseline */
 }
 
 /* Submit Button Loading State During EmailJS Operations */
 .btn.loading {
-    opacity: 0.8;                                  /* Visual indication of disabled state */
-    cursor: not-allowed;                           /* Shows disabled cursor on hover */
-    transform: none !important;                    /* Disable normal button animations */
+    opacity: 0.8;
+    /* Visual indication of disabled state */
+    cursor: not-allowed;
+    /* Shows disabled cursor on hover */
+    transform: none !important;
+    /* Disable normal button animations */
 }
 
 /* Disable All Hover Effects During EmailJS Processing */
 .btn.loading:hover {
-    transform: none !important;                    /* Prevent hover scale/transform effects */
-    box-shadow: none !important;                   /* Disable hover shadow effects */
+    transform: none !important;
+    /* Prevent hover scale/transform effects */
+    box-shadow: none !important;
+    /* Disable hover shadow effects */
 }
 
 /* Keyframe Animation for Loading Spinner */
 @keyframes spin {
-    0% { transform: rotate(0deg); }                /* Start position */
-    100% { transform: rotate(360deg); }            /* Full rotation */
+    0% {
+        transform: rotate(0deg);
+    }
+
+    /* Start position */
+    100% {
+        transform: rotate(360deg);
+    }
+
+    /* Full rotation */
 }
 
 /* Footer */
@@ -873,6 +960,7 @@ body {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -880,12 +968,19 @@ body {
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
         transform: translateX(-50%) translateY(0);
     }
+
     40% {
         transform: translateX(-50%) translateY(-10px);
     }
+
     60% {
         transform: translateX(-50%) translateY(-5px);
     }
@@ -898,7 +993,7 @@ body {
     .hamburger {
         display: flex;
     }
-    
+
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -911,120 +1006,120 @@ body {
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
         padding: 2rem 0;
     }
-    
+
     .nav-menu.active {
         left: 0;
     }
-    
+
     .nav-menu a {
         padding: 0.5rem;
         display: block;
     }
-    
+
     .hamburger.active .bar:nth-child(2) {
         opacity: 0;
     }
-    
+
     .hamburger.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
-    
+
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }
-    
+
     .home {
         padding: 100px 15px 60px 15px;
     }
-    
+
     .home-title {
         font-size: 2.2rem;
     }
-    
+
     .home-description {
         font-size: 0.95rem;
         margin-bottom: 1.5rem;
     }
-    
+
     .home-buttons {
         flex-direction: column;
         align-items: center;
         gap: 0.8rem;
     }
-    
+
     .skills-tags {
         gap: 0.4rem;
     }
-    
+
     .skill-tag {
         font-size: 0.75rem;
         padding: 0.3rem 0.6rem;
     }
-    
+
     .home-skills {
         margin-bottom: 2rem;
     }
-    
+
     .about-content {
         grid-template-columns: 1fr;
         text-align: center;
     }
-    
+
     .contact-content {
         grid-template-columns: 1fr;
     }
-    
 
-    
+
+
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .skills-category {
         margin-bottom: 2rem;
     }
-    
+
     /* Experience responsive */
     .experience-cards {
         grid-template-columns: 1fr;
     }
-    
+
     .experience-meta {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
     }
-    
+
     .experience-header {
         padding: 1.5rem;
     }
-    
+
     .experience-body {
         padding: 1.5rem;
     }
-    
+
     .experience-title h3 {
         font-size: 1.3rem;
     }
-    
+
     .experience-title h4 {
         font-size: 1rem;
     }
-    
+
     /* Achievements responsive */
     .achievements-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .achievement-card {
         padding: 1.5rem;
     }
-    
+
     .achievement-icon {
         width: 50px;
         height: 50px;
     }
-    
+
     .achievement-icon i {
         font-size: 1.3rem;
     }
@@ -1034,69 +1129,69 @@ body {
     .container {
         padding: 0 15px;
     }
-    
+
     .home {
         padding: 90px 15px 50px 15px;
     }
-    
+
     .home-title {
         font-size: 1.8rem;
         margin-bottom: 0.8rem;
     }
-    
+
     .greeting {
         font-size: 0.9rem;
         margin-bottom: 0.3rem;
     }
-    
+
     .role-prefix {
         font-size: 1rem;
     }
-    
+
     .animated-roles {
         font-size: 1.1rem;
     }
-    
+
     .home-description {
         font-size: 0.9rem;
         margin-bottom: 1.2rem;
     }
-    
+
     .skills-label {
         font-size: 0.8rem;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .profile-img {
         width: 200px;
         height: 200px;
     }
-    
+
     .contact-form {
         padding: 1.5rem;
     }
-    
+
     .home-stats {
         flex-direction: column;
         gap: 1.5rem;
     }
-    
+
     .role-container {
         flex-direction: column;
         gap: 0.5rem;
     }
-    
+
     .animated-roles {
         height: 1.8rem;
     }
-    
+
     .role {
         font-size: 1.1rem;
     }
-    
+
     .floating-shapes .shape {
         display: none;
     }

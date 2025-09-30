@@ -642,7 +642,7 @@ body {
     transform: translateY(-1px);
 }
 
-/* Achievements Section */
+/* Achievements Section
 .achievements {
     padding: 100px 0;
     background: #f8f9fa;
@@ -820,7 +820,7 @@ body {
 .achievement-card.special .tag {
     background: #f4ecf7;
     color: #7d3c98;
-}
+} */
 
 .tag:hover {
     transform: scale(1.05);
